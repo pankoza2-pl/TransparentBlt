@@ -1,13 +1,21 @@
 #include <windows.h>
+#include <cmath>
 #pragma comment(lib, "Msimg32.lib")
 
-DWORD WINAPI TransparentBltExample(LPVOID Example)
+DWORD WINAPI TransparentBltExample(
+    LPVOID Example
+)
 {
+    HWND wnd = GetDesktopWindow();
     HDC hdcScreen = GetDC(0);
     int sw = GetSystemMetrics(0), sh = GetSystemMetrics(1);
     COLORREF TransparentBltColor = (RGB(rand() % 255, rand() % 255, rand() % 255));
     while (1) {
-        TransparentBlt(hdcScreen, rand() % 255, rand() % 255, sw, sh, hdcScreen, rand() % 255, rand() % 255, rand() % 255, rand() % 255, TransparentBltColor);
+        for (;;) {
+            TransparentBlt(hdcScreen, rand() % 255, rand() % 255, sw, sh, hdcScreen, rand() % 255, rand() % 255, rand() % 255, rand() % 255, TransparentBltColor);
+        }
+        ReleaseDC(wnd, hdcScreen);
+        DeleteDC(hdcScreen); DeleteObject(&sw); DeleteObject(&sh);
     }
 }
 
