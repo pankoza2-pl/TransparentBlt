@@ -1,5 +1,4 @@
 #include <windows.h>
-#include <cmath>
 #pragma comment(lib, "Msimg32.lib")
 
 DWORD WINAPI TransparentBltExample(LPVOID Example)
